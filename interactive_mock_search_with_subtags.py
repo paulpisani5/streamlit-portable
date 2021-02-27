@@ -11,7 +11,7 @@ from annotated_text import annotated_text
 #from sqlalchemy import create_engine
 from datetime import datetime 
 import os
-import pickle
+import pickle5 as pickle
 
 #import json
 
