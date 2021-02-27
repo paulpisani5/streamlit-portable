@@ -5,3 +5,4 @@ numpy==1.19.4
 sqlalchemy==1.3.20
 scikit-learn==0.23.2
 psycopg2
+pickle5
