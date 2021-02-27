@@ -591,12 +591,12 @@ else:
 # session_id = get_report_ctx().session_id
 # session_id = session_id.replace('-','_')
 
-# # initialize state variables
-# session_state = SessionState.get(text_query='')
+# initialize state variables
+session_state = SessionState.get(text_query='')
 
-# # force reset state variables if desired
-# def reset_session_state():
-#     session_state.text_query=''
+# force reset state variables if desired
+def reset_session_state():
+    session_state.text_query=''
 
 if st.sidebar.button('Start Over'):
     reset_session_state()
