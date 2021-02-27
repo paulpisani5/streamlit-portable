@@ -8,10 +8,10 @@ from streamlit.report_thread import get_report_ctx
 import SessionState
 from annotated_text import annotated_text
 
-from sqlalchemy import create_engine
+#from sqlalchemy import create_engine
 from datetime import datetime 
 import os
-import pickle5
+import pickle
 
 #import json
 
@@ -31,89 +31,89 @@ from collections import defaultdict
 
 # def refresh_tables():
 
-#     # engine.execute("""DROP TABLE sessions;""")
-#     # engine.execute("""DROP TABLE sessions_2;""")
-#     # engine.execute("""DROP TABLE submitted_responses;""")
-#     # engine.execute("""DROP TABLE submitted_responses_topic;""")
+    # # engine.execute("""DROP TABLE sessions;""")
+    # # engine.execute("""DROP TABLE sessions_2;""")
+    # # engine.execute("""DROP TABLE submitted_responses;""")
+    # # engine.execute("""DROP TABLE submitted_responses_topic;""")
 
-#     engine.execute("""
-#                 CREATE TABLE IF NOT EXISTS sessions (
-#                 session_id VARCHAR (255) NOT NULL,
-#                 created_on VARCHAR (255) NOT NULL,
-#                 username VARCHAR (255) NOT NULL
-#                 );
-#     """)
+    # engine.execute("""
+                # CREATE TABLE IF NOT EXISTS sessions (
+                # session_id VARCHAR (255) NOT NULL,
+                # created_on VARCHAR (255) NOT NULL,
+                # username VARCHAR (255) NOT NULL
+                # );
+    # """)
 
-#     engine.execute("""
-#                 CREATE TABLE IF NOT EXISTS submitted_responses (
-#                 session_id VARCHAR (255) NOT NULL,
-#                 created_on VARCHAR (255) NOT NULL,
-#                 topic_label VARCHAR (255) NOT NULL,
-#                 topic_1 varchar (255) NOT NULL,
-#                 topic_2 varchar (255) NOT NULL,
-#                 topic_3 varchar (255) NOT NULL,
-#                 other_topics varchar (255) NOT NULL
-#                 );
-#     """)
+    # engine.execute("""
+                # CREATE TABLE IF NOT EXISTS submitted_responses (
+                # session_id VARCHAR (255) NOT NULL,
+                # created_on VARCHAR (255) NOT NULL,
+                # topic_label VARCHAR (255) NOT NULL,
+                # topic_1 varchar (255) NOT NULL,
+                # topic_2 varchar (255) NOT NULL,
+                # topic_3 varchar (255) NOT NULL,
+                # other_topics varchar (255) NOT NULL
+                # );
+    # """)
 
-#     engine.execute("""
-#                 CREATE TABLE IF NOT EXISTS submitted_responses_topic (
-#                 session_id VARCHAR (255) NOT NULL,
-#                 created_on VARCHAR (255) NOT NULL,
-#                 topic_label VARCHAR (255) NOT NULL,
-#                 topic_label_appropriateness VARCHAR (255) NOT NULL,
-#                 improved_topic_label VARCHAR (255) NOT NULL,
-#                 concerns_opportunities VARCHAR (255) NOT NULL
-#                 );
-#     """)
+    # engine.execute("""
+                # CREATE TABLE IF NOT EXISTS submitted_responses_topic (
+                # session_id VARCHAR (255) NOT NULL,
+                # created_on VARCHAR (255) NOT NULL,
+                # topic_label VARCHAR (255) NOT NULL,
+                # topic_label_appropriateness VARCHAR (255) NOT NULL,
+                # improved_topic_label VARCHAR (255) NOT NULL,
+                # concerns_opportunities VARCHAR (255) NOT NULL
+                # );
+    # """)
 
-#     engine.execute("""
-#                 CREATE TABLE IF NOT EXISTS activity_tag_review (
-#                 session_id VARCHAR (255) NOT NULL,
-#                 created_on VARCHAR (255) NOT NULL,
-#                 activity_uid VARCHAR (255) NOT NULL,
-#                 topic_0_relevance VARCHAR (255) NOT NULL,
-#                 topic_1_relevance VARCHAR (255) NOT NULL,
-#                 topic_2_relevance VARCHAR (255) NOT NULL,
-#                 topic_3_relevance VARCHAR (255) NOT NULL,
-#                 topic_4_relevance VARCHAR (255) NOT NULL
-#                 );
-#     """)
+    # engine.execute("""
+                # CREATE TABLE IF NOT EXISTS activity_tag_review (
+                # session_id VARCHAR (255) NOT NULL,
+                # created_on VARCHAR (255) NOT NULL,
+                # activity_uid VARCHAR (255) NOT NULL,
+                # topic_0_relevance VARCHAR (255) NOT NULL,
+                # topic_1_relevance VARCHAR (255) NOT NULL,
+                # topic_2_relevance VARCHAR (255) NOT NULL,
+                # topic_3_relevance VARCHAR (255) NOT NULL,
+                # topic_4_relevance VARCHAR (255) NOT NULL
+                # );
+    # """)
 
 
 # def authenticate_user():
     
-#     existing_session = engine.execute("""SELECT COUNT(*) FROM sessions WHERE session_id = '%s'""" % session_id).first()[0] > 0
-#     if existing_session > 0: 
-#         return True 
+    # existing_session = engine.execute("""SELECT COUNT(*) FROM sessions WHERE session_id = '%s'""" % session_id).first()[0] > 0
+    # if existing_session > 0: 
+        # return True 
 
-#     else: 
-#         placeholder_1 = st.sidebar.empty()
-#         placeholder_2 = st.sidebar.empty()
-#         placeholder_3 = st.sidebar.empty()
+    # else: 
+        # placeholder_1 = st.sidebar.empty()
+        # placeholder_2 = st.sidebar.empty()
+        # placeholder_3 = st.sidebar.empty()
 
-#         username = placeholder_1.text_input("Enter username: ")
-#         password = placeholder_2.text_input("Enter password: ")
-#         sign_in = placeholder_3.button("Sign in")
+        # username = placeholder_1.text_input("Enter username: ")
+        # password = placeholder_2.text_input("Enter password: ")
+        # sign_in = placeholder_3.button("Sign in")
 
-#         if sign_in and ((username == 'paul' and password == 'test') or (username == 'kejia' and password == 'test2') or (username == 'christoph' and password == 'classified')):
-#             today = str(datetime.now())
-#             engine.execute("""
-#                 INSERT INTO sessions(session_id, created_on, username) 
-#                 VALUES ('%s', '%s', '%s')
-#             """ % (session_id, today, username))
+        # if sign_in and ((username == 'paul' and password == 'test') or (username == 'kejia' and password == 'test2') or (username == 'christoph' and password == 'classified')):
+            # today = str(datetime.now())
+            # engine.execute("""
+                # INSERT INTO sessions(session_id, created_on, username) 
+                # VALUES ('%s', '%s', '%s')
+            # """ % (session_id, today, username))
 
-#             placeholder_1.empty()
-#             placeholder_2.empty()
-#             placeholder_3.empty()
+            # placeholder_1.empty()
+            # placeholder_2.empty()
+            # placeholder_3.empty()
 
-#             return True
+            # return True
 
-#         elif sign_in and ~((username == 'paul' and password == 'test') or (username == 'kejia' and password == 'test2')):
-#             st.subheader('Login failed, please retry!')
+        # elif sign_in and ~((username == 'paul' and password == 'test') or (username == 'kejia' and password == 'test2')):
+            # st.subheader('Login failed, please retry!')
 
-#         else: 
-#             return False
+        # else: 
+            # return False
 
 
 @st.cache
@@ -184,7 +184,7 @@ def load_activities():
             field = 'topic_%d_id_global' % i
             activities.loc[:,field] = topic_id_mapping.loc[activities[field].values]['topic_0_id_global_prev'].values
 
-#     activities['photo_url'] = activities['details'].apply(lambda x: extract_photo_url(x))
+    activities['photo_url'] = activities['details'].apply(lambda x: extract_photo_url(x))
     relevant_columns = [
         'uid',
         'title',
@@ -368,7 +368,7 @@ def interactive_search_mock_with_subtags():
 
 
     with open(subtags_path, 'rb') as handle:
-        drawing_subtags = pickle5.load(handle)
+        drawing_subtags = pickle.load(handle)
 
     for uid in drawing_subtags:
         tags = drawing_subtags[uid]
@@ -583,13 +583,13 @@ else:
     topic_vectors = np.load(topic_vectors_path)
 
 
-# # connect to local db
-# engine = create_engine('postgresql://christoph:classified@localhost:5432/streamlit_topics')
+# connect to local db
+#engine = create_engine('postgresql://christoph:classified@localhost:5432/streamlit_topics')
 
-# # st.set_page_config(page_title='Topic Explorer', page_icon=None, layout='wide', initial_sidebar_state='auto')
+# st.set_page_config(page_title='Topic Explorer', page_icon=None, layout='wide', initial_sidebar_state='auto')
 
-# session_id = get_report_ctx().session_id
-# session_id = session_id.replace('-','_')
+session_id = get_report_ctx().session_id
+session_id = session_id.replace('-','_')
 
 # initialize state variables
 session_state = SessionState.get(text_query='')
@@ -598,11 +598,16 @@ session_state = SessionState.get(text_query='')
 def reset_session_state():
     session_state.text_query=''
 
-if st.sidebar.button('Start Over'):
-    reset_session_state()
+#refresh_tables()
 
-action = st.sidebar.selectbox('Select Module:',['Option 1'])
+# login
+#if authenticate_user():
 
-if action == 'Option 1':
-    interactive_search_mock_with_subtags()
+#if st.sidebar.button('Start Over'):
+#    reset_session_state()
+#
+#action = st.sidebar.selectbox('Select Module:',['Option 1'])
+#
+#if action == 'Option 1':
 
+interactive_search_mock_with_subtags()
