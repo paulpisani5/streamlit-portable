@@ -368,7 +368,7 @@ def interactive_search_mock_with_subtags():
 
 
     with open(subtags_path, 'rb') as handle:
-        drawing_subtags = pickle.load(handle)
+        drawing_subtags = pickle5.load(handle)
 
     for uid in drawing_subtags:
         tags = drawing_subtags[uid]
